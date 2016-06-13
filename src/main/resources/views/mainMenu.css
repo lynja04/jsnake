@@ -1,0 +1,27 @@
+.root {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #00FF7F, #000000);
+    -fx-spacing: 30;
+    -fx-padding: 25;
+    -fx-pref-width: 250.0;
+    -fx-pref-height: 250.0;
+}
+
+#welcome {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000;
+    -fx-alignment: center-right;
+}
+
+#difficultyBtns {
+    -fx-spacing: 10;
+}
+
+#startBtn {
+    -fx-pref-width: 75;
+}
+
+RadioButton, Button {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}

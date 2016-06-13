@@ -1,0 +1,28 @@
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
+<VBox styleClass="root" xmlns:fx="http://javafx.com/fxml">
+    <stylesheets>
+        <URL value="@mainMenu.css" />
+    </stylesheets>
+
+    <HBox alignment="CENTER">
+        <Label alignment="CENTER" text="Welcome to JSnake!" id="welcome" />
+    </HBox>
+
+    <fx:define>
+        <ToggleGroup fx:id="difficultyBtnsGroup" />
+    </fx:define>
+    <HBox alignment="CENTER">
+        <VBox id="difficultyBtns">
+            <RadioButton text="Easy" toggleGroup="$difficultyBtnsGroup" />
+            <RadioButton text="Medium" selected="true" toggleGroup="$difficultyBtnsGroup" />
+            <RadioButton text="Hard" toggleGroup="$difficultyBtnsGroup" />
+        </VBox>
+    </HBox>
+
+    <HBox alignment="CENTER">
+        <Button text="Start" id="startBtn" />
+    </HBox>
+</VBox>
