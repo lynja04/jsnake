@@ -1,0 +1,13 @@
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.HBox?>
+<VBox styleClass="root" xmlns:fx="http://javafx.com/fxml">
+    <stylesheets>
+        <URL value="@snakeGame.css" />
+    </stylesheets>
+
+    <HBox alignment="CENTER">
+        <Label alignment="CENTER" text="Welcome to JSnake!" id="welcome" />
+    </HBox>
+</VBox>

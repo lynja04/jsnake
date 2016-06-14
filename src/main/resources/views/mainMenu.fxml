@@ -12,7 +12,7 @@
     </HBox>
 
     <fx:define>
-        <ToggleGroup fx:id="difficultyBtnsGroup" />
+        <ToggleGroup fx:id="difficultyBtnsGroup"  />
     </fx:define>
     <HBox alignment="CENTER">
         <VBox id="difficultyBtns">
@@ -23,6 +23,6 @@
     </HBox>
 
     <HBox alignment="CENTER">
-        <Button text="Start" id="startBtn" />
+        <Button text="Start" id="startBtn" onAction="#startGame" />
     </HBox>
 </VBox>
