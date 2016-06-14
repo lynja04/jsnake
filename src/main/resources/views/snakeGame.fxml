@@ -1,13 +1,31 @@
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-<?import java.net.URL?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<VBox styleClass="root" xmlns:fx="http://javafx.com/fxml">
+<?import javafx.scene.layout.Pane?>
+<?import java.net.URL?>
+<BorderPane styleClass="root" xmlns:fx="http://javafx.com/fxml">
     <stylesheets>
         <URL value="@snakeGame.css" />
     </stylesheets>
 
-    <HBox alignment="CENTER">
-        <Label alignment="CENTER" text="Welcome to JSnake!" id="welcome" />
-    </HBox>
-</VBox>
+    <top>
+        <HBox id="header">
+            <Pane>
+                <HBox>
+                    <Label text="Score: " id="scoreLabel" styleClass="score" />
+                    <Label text="0" id="scoreNumber" styleClass="score" />
+                </HBox>
+            </Pane>
+            <Button text="Start" id="startBtn" />
+            <Pane id="logoContainer">
+                <ImageView id="logo" fitWidth="176" fitHeight="60" />
+            </Pane>
+        </HBox>
+    </top>
+    <center>
+        <Pane id="game">
+        </Pane>
+    </center>
+</BorderPane>

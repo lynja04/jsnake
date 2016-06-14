@@ -50,7 +50,7 @@ class Snake() : Application(){
     var direction = Direction.RIGHT
 
     fun createContent(diffLevel: Int) : Parent {
-        val image = Image("ca.png")
+        val image = Image("img/ca.png")
         val logo = Rectangle(BLOCK_SIZE + 20, BLOCK_SIZE + 20)
         val imagePat = ImagePattern(image)
         logo.fill = imagePat
@@ -74,7 +74,7 @@ class Snake() : Application(){
         border.top = hbox
         val root = Pane()
         root.setPrefSize(WIDTH, HEIGHT)
-        root.style = "-fx-background-image: url('snakeskin.jpg');"
+        root.style = "-fx-background-image: url('img/game_bg.jpg');"
         border.center = root
 
         when(diffLevel){
@@ -96,7 +96,7 @@ class Snake() : Application(){
         val snakeBody = Group()
         snake = snakeBody.children
 
-        val mouseImage = Image("mouse.png")
+        val mouseImage = Image("img/mouse.png")
         val food = Rectangle(BLOCK_SIZE, BLOCK_SIZE)
         val imagePattern = ImagePattern(mouseImage)
         food.fill = imagePattern

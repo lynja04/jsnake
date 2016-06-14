@@ -21,9 +21,6 @@ class SnakeApplication: Application() {
         val menuState = MenuState(gsm, null)
         gsm.changeState(menuState)
         primaryStage.show()
-        /*while(gsm.gameRunning) {
-            gsm.update()
-        }*/
     }
 
 }

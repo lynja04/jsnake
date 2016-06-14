@@ -1,0 +1,27 @@
+#header {
+    -fx-background-color: black;
+    -fx-spacing: 225;
+    -fx-padding: 20;
+}
+
+#startBtn {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-pref-width: 100;
+}
+
+#game {
+    -fx-pref-width: 800;
+    -fx-pref-height: 800;
+    -fx-background-image: url('../img/game_bg.jpg');
+}
+
+#logo {
+    -fx-image: url('../img/logo.png');
+}
+
+.score {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
