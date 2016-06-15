@@ -1,6 +1,6 @@
 #header {
     -fx-background-color: black;
-    -fx-spacing: 225;
+    -fx-spacing: 200;
     -fx-padding: 20;
 }
 
@@ -10,9 +10,7 @@
     -fx-pref-width: 100;
 }
 
-#game {
-    -fx-pref-width: 800;
-    -fx-pref-height: 800;
+#gamePane {
     -fx-background-image: url('../img/game_bg.jpg');
 }
 

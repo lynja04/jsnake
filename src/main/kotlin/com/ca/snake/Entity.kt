@@ -1,12 +1,15 @@
 package com.ca.snake
 
-import javafx.scene.image.ImageView
+import javafx.scene.image.Image
 
-class Entity(imageUrl: String) {
+abstract class Entity(imageUrl: String, var x: Int, var y: Int, val grid: Grid) {
 
-    val image: ImageView
+    val image: Image
+    var updated: Boolean = false
 
     init {
-        image = ImageView(imageUrl)
+        image = Image(imageUrl)
     }
+
+    abstract fun update()
 }

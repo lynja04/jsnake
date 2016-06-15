@@ -7,7 +7,6 @@ abstract class GameState(val gameStateManager: GameStateManager, params: Map<Str
 
     init {
         init(params)
-        update()
     }
 
     abstract fun init(args: Map<String, String>?)

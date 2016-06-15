@@ -5,6 +5,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import java.net.URL?>
+<?import javafx.scene.canvas.Canvas?>
 <BorderPane styleClass="root" xmlns:fx="http://javafx.com/fxml">
     <stylesheets>
         <URL value="@snakeGame.css" />
@@ -18,14 +19,15 @@
                     <Label text="0" id="scoreNumber" styleClass="score" />
                 </HBox>
             </Pane>
-            <Button text="Start" id="startBtn" />
+            <Button text="Start" fx:id="startBtn" onAction="#start"/>
             <Pane id="logoContainer">
                 <ImageView id="logo" fitWidth="176" fitHeight="60" />
             </Pane>
         </HBox>
     </top>
     <center>
-        <Pane id="game">
+        <Pane id="gamePane">
+            <Canvas fx:id="gameCanvas" height="800" width="800" />
         </Pane>
     </center>
 </BorderPane>

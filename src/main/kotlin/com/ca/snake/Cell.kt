@@ -1,4 +1,4 @@
 package com.ca.snake
 
-class Cell(val entity: Entity?) {
+class Cell(var entity: Entity?) {
 }

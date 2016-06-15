@@ -1,6 +1,6 @@
 package com.ca.snake
 
-class Grid(width: Int, height: Int) {
+class Grid(val width: Int, val height: Int) {
 
     val cells: Array<Array<Cell>>
 

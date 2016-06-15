@@ -50,7 +50,7 @@ class Snake() : Application(){
     var direction = Direction.RIGHT
 
     fun createContent(diffLevel: Int) : Parent {
-        val image = Image("img/ca.png")
+        val image = Image("img/logo.png")
         val logo = Rectangle(BLOCK_SIZE + 20, BLOCK_SIZE + 20)
         val imagePat = ImagePattern(image)
         logo.fill = imagePat
