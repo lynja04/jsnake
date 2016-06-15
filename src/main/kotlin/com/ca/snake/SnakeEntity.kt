@@ -5,6 +5,8 @@ import javafx.scene.input.KeyCode
 
 class SnakeEntity(imageUrl: String, x: Int, y: Int, grid: Grid, var type: Type, var next: SnakeEntity?, var prev: SnakeEntity?) : Entity(imageUrl, x, y, grid) {
 
+    var oldX: Int = 0
+    var oldY: Int = 0
     var state: State = State.ALIVE
     var direction: Direction = Direction.RIGHT
     val images = mapOf(Direction.RIGHT to Image("/img/snakehead_right.png"),
@@ -13,12 +15,40 @@ class SnakeEntity(imageUrl: String, x: Int, y: Int, grid: Grid, var type: Type, 
             Direction.UP to Image("/img/snakehead_up.png"))
 
     override fun update() {
+        when(type) {
+            Type.HEAD -> {
+                updateHead()
+            }
+            Type.TAIL, Type.BODY -> {
+                updateBody()
+            }
+        }
+    }
+
+    fun updateBody() {
         when(state) {
             State.ALIVE -> {
                 val curCell = grid.getCell(x, y)
+                oldX = x
+                oldY = y
+                x = prev?.oldX!!
+                y = prev?.oldY!!
+                val nextCell = grid.getCell(x, y)
+                nextCell.entity = curCell.entity
+                curCell.entity = null
+            }
+        }
+    }
+
+    fun updateHead() {
+        when (state) {
+            State.ALIVE -> {
+                val curCell = grid.getCell(x, y)
+                oldX = x
+                oldY = y
                 var tempX = x
                 var tempY = y
-                when(direction) {
+                when (direction) {
                     Direction.UP -> {
                         tempY--
                     }
@@ -32,8 +62,21 @@ class SnakeEntity(imageUrl: String, x: Int, y: Int, grid: Grid, var type: Type, 
                         tempX--
                     }
                 }
-                if(tempX >= 0 && tempX < grid.width && tempY >= 0 && tempY < grid.height) {
+                if (tempX >= 0 && tempX < grid.width && tempY >= 0 && tempY < grid.height) {
                     val nextCell = grid.getCell(tempX, tempY)
+                    val nextEntity = nextCell.entity
+                    if (nextEntity != null && nextEntity is MouseEntity) {
+                        var curSnake = this
+                        while (curSnake.next != null) {
+                            curSnake = curSnake.next!!
+                        }
+                        curSnake.next = SnakeEntity("/img/snakehead_right.png", curSnake.oldX, curSnake.oldY, grid, Type.TAIL, null, curSnake)
+                        if (curSnake.type == Type.TAIL) {
+                            curSnake.type = Type.BODY
+                        }
+                        nextEntity.state = MouseEntity.State.DEAD
+                        nextEntity.update()
+                    }
                     nextCell.entity = curCell.entity
                     curCell.entity = null
                     x = tempX
@@ -43,17 +86,6 @@ class SnakeEntity(imageUrl: String, x: Int, y: Int, grid: Grid, var type: Type, 
                 }
             }
         }
-
-        /*when(type) {
-            Type.HEAD -> {
-            }
-            Type.BODY -> {
-
-            }
-            Type.TAIL -> {
-
-            }
-        }*/
     }
 
     fun handleInput(keyCode: KeyCode) {

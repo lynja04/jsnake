@@ -24,6 +24,7 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
     val gridHeight = 20
     val cellGrid: Grid = Grid(gridWidth, gridHeight)
     val snakeHead: SnakeEntity
+    val mouseEntity: MouseEntity
     @FXML
     lateinit var gameCanvas: Canvas
     @FXML
@@ -36,7 +37,8 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
         val random: Random = Random()
         val randX = random.nextInt(gridWidth)
         val randY = random.nextInt(gridHeight)
-        cellGrid.cells[randX][randY].entity = MouseEntity("/img/mouse.png", randX, randY, cellGrid)
+        mouseEntity = MouseEntity("/img/mouse.png", randX, randY, cellGrid)
+        cellGrid.cells[randX][randY].entity = mouseEntity
         drawEntity(cellGrid.cells[0][0].entity!!)
         drawEntity(cellGrid.cells[randX][randY].entity!!)
     }
@@ -70,7 +72,14 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
     override fun update() {
         graphicsContext.clearRect(0.0, 0.0, gridWidth * BLOCK_SIZE, gridHeight * BLOCK_SIZE)
         val entityList = mutableListOf<Entity>()
-        for(i in 0..gridWidth - 1) {
+        var curSnakeEntity: SnakeEntity? = snakeHead
+        while(curSnakeEntity != null) {
+            curSnakeEntity.update()
+            drawEntity(curSnakeEntity)
+            curSnakeEntity = curSnakeEntity.next
+        }
+        drawEntity(mouseEntity)
+        /*for(i in 0..gridWidth - 1) {
             for(j in 0..gridHeight - 1) {
                 val curEntity = cellGrid.cells[i][j].entity
                 if(curEntity != null) {
@@ -85,7 +94,7 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
         }
         for(e in entityList) {
             e.updated = false
-        }
+        }*/
     }
 
     fun drawEntity(entity: Entity) {
