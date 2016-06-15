@@ -48,16 +48,18 @@ class SnakeEntity(imageUrl: String, x: Int, y: Int, grid: Grid, var type: Type, 
                 oldY = y
                 x = prev?.oldX!!
                 y = prev?.oldY!!
+                val prevX = prev?.x
+                val prevY = prev?.y
                 val nextCell = grid.getCell(x, y)
                 nextCell.entity = curCell.entity
                 curCell.entity = null
-                if(x > oldX) {
+                if(x < prevX!!) {
                     image = tailImages[Direction.RIGHT]!!
-                } else if(x < oldX) {
+                } else if(x > prevX!!) {
                     image = tailImages[Direction.LEFT]!!
-                } else if(y > oldY) {
+                } else if(y < prevY!!) {
                     image = tailImages[Direction.DOWN]!!
-                } else if(y < oldY) {
+                } else if(y > prevY!!) {
                     image = tailImages[Direction.UP]!!
                 }
             }
