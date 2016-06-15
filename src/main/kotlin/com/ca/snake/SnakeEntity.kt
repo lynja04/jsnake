@@ -1,12 +1,16 @@
 package com.ca.snake
 
+import javafx.scene.image.Image
 import javafx.scene.input.KeyCode
-import java.awt.event.KeyEvent
 
 class SnakeEntity(imageUrl: String, x: Int, y: Int, grid: Grid, var type: Type, var next: SnakeEntity?, var prev: SnakeEntity?) : Entity(imageUrl, x, y, grid) {
 
     var state: State = State.ALIVE
     var direction: Direction = Direction.RIGHT
+    val images = mapOf(Direction.RIGHT to Image("/img/snakehead_right.png"),
+            Direction.DOWN to Image("/img/snakehead_down.png"),
+            Direction.LEFT to Image("/img/snakehead_left.png"),
+            Direction.UP to Image("/img/snakehead_up.png"))
 
     override fun update() {
         when(state) {
@@ -55,16 +59,28 @@ class SnakeEntity(imageUrl: String, x: Int, y: Int, grid: Grid, var type: Type, 
     fun handleInput(keyCode: KeyCode) {
         when(keyCode) {
             KeyCode.UP, KeyCode.W -> {
-                direction = if(direction != Direction.DOWN) Direction.UP else direction
+                if(direction != Direction.DOWN) {
+                    direction = Direction.UP
+                    image = images[Direction.UP]!!
+                }
             }
             KeyCode.RIGHT, KeyCode.D -> {
-                direction = if(direction != Direction.LEFT) Direction.RIGHT else direction
+                if(direction != Direction.LEFT) {
+                    direction = Direction.RIGHT
+                    image = images[Direction.RIGHT]!!
+                }
             }
             KeyCode.DOWN, KeyCode.S -> {
-                direction = if(direction != Direction.UP) Direction.DOWN else direction
+                if(direction != Direction.UP) {
+                    direction = Direction.DOWN
+                    image = images[Direction.DOWN]!!
+                }
             }
             KeyCode.LEFT, KeyCode.A -> {
-                direction = if(direction != Direction.RIGHT) Direction.LEFT else direction
+                if(direction != Direction.RIGHT) {
+                    direction = Direction.LEFT
+                    image = images[Direction.LEFT]!!
+                }
             }
         }
     }

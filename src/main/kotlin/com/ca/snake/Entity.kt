@@ -4,7 +4,7 @@ import javafx.scene.image.Image
 
 abstract class Entity(imageUrl: String, var x: Int, var y: Int, val grid: Grid) {
 
-    val image: Image
+    var image: Image
     var updated: Boolean = false
 
     init {
