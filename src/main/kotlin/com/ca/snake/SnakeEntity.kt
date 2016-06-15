@@ -9,18 +9,57 @@ class SnakeEntity(imageUrl: String, x: Int, y: Int, grid: Grid, var type: Type, 
     var oldY: Int = 0
     var state: State = State.ALIVE
     var direction: Direction = Direction.RIGHT
-    val images = mapOf(Direction.RIGHT to Image("/img/snakehead_right.png"),
+    val headImages = mapOf(Direction.RIGHT to Image("/img/snakehead_right.png"),
             Direction.DOWN to Image("/img/snakehead_down.png"),
             Direction.LEFT to Image("/img/snakehead_left.png"),
             Direction.UP to Image("/img/snakehead_up.png"))
+    val tailImages = mapOf(Direction.RIGHT to Image("/img/snaketail_right.png"),
+            Direction.DOWN to Image("/img/snaketail_down.png"),
+            Direction.LEFT to Image("/img/snaketail_left.png"),
+            Direction.UP to Image("/img/snaketail_up.png"))
+    val bodyImages = mapOf(Direction.RIGHT to Image("/img/snake_horizontal.png"),
+            Direction.LEFT to Image("/img/snake_horizontal.png"),
+            Direction.UP to Image("/img/snake_vertical.png"),
+            Direction.DOWN to Image("/img/snake_vertical.png"),
+            Direction.UPLEFT to Image("/img/snakeelbow_up_left.png"),
+            Direction.UPRIGHT to Image("/img/snakeelbow_up_right.png"),
+            Direction.DOWNLEFT to Image("/img/snakeelbow_down_left.png"),
+            Direction.DOWNRIGHT to Image("/img/snakeelbow_down_right.png"))
 
     override fun update() {
         when(type) {
             Type.HEAD -> {
                 updateHead()
             }
-            Type.TAIL, Type.BODY -> {
+            Type.BODY -> {
                 updateBody()
+            }
+            Type.TAIL -> {
+                updateTail()
+            }
+        }
+    }
+
+    fun updateTail() {
+        when(state) {
+            State.ALIVE -> {
+                val curCell = grid.getCell(x, y)
+                oldX = x
+                oldY = y
+                x = prev?.oldX!!
+                y = prev?.oldY!!
+                val nextCell = grid.getCell(x, y)
+                nextCell.entity = curCell.entity
+                curCell.entity = null
+                if(x > oldX) {
+                    image = tailImages[Direction.RIGHT]!!
+                } else if(x < oldX) {
+                    image = tailImages[Direction.LEFT]!!
+                } else if(y > oldY) {
+                    image = tailImages[Direction.DOWN]!!
+                } else if(y < oldY) {
+                    image = tailImages[Direction.UP]!!
+                }
             }
         }
     }
@@ -36,6 +75,23 @@ class SnakeEntity(imageUrl: String, x: Int, y: Int, grid: Grid, var type: Type, 
                 val nextCell = grid.getCell(x, y)
                 nextCell.entity = curCell.entity
                 curCell.entity = null
+                val prevX = prev?.x
+                val prevY = prev?.y
+                val nextX = oldX
+                val nextY = oldY
+                if(prevY == nextY) {
+                    image = bodyImages[Direction.RIGHT]!!
+                } else if(prevX == nextX) {
+                    image = bodyImages[Direction.UP]!!
+                } else if((prevX!! < x && nextY < y) || (nextX < x && prevY!! < y)) {
+                    image = bodyImages[Direction.DOWNLEFT]!!
+                } else if((prevX!! > x && nextY < y) || (nextX > x && prevY!! < y)) {
+                    image = bodyImages[Direction.DOWNRIGHT]!!
+                } else if((nextX < x && prevY!! > y) || (prevX!! < x && nextY > y)) {
+                    image = bodyImages[Direction.UPLEFT]!!
+                } else if((nextX > x && prevY!! > y) || (prevX!! >x && nextY > y)) {
+                    image = bodyImages[Direction.UPRIGHT]!!
+                }
             }
         }
     }
@@ -65,20 +121,22 @@ class SnakeEntity(imageUrl: String, x: Int, y: Int, grid: Grid, var type: Type, 
                 if (tempX >= 0 && tempX < grid.width && tempY >= 0 && tempY < grid.height) {
                     val nextCell = grid.getCell(tempX, tempY)
                     val nextEntity = nextCell.entity
+                    nextCell.entity = curCell.entity
+                    curCell.entity = null
                     if (nextEntity != null && nextEntity is MouseEntity) {
                         var curSnake = this
                         while (curSnake.next != null) {
                             curSnake = curSnake.next!!
                         }
-                        curSnake.next = SnakeEntity("/img/snakehead_right.png", curSnake.oldX, curSnake.oldY, grid, Type.TAIL, null, curSnake)
+                        curSnake.next = SnakeEntity("/img/snaketail_right.png", curSnake.oldX, curSnake.oldY, grid, Type.TAIL, null, curSnake)
+                        val curSnakeCell = grid.getCell(curSnake.oldX, curSnake.oldY)
+                        curSnakeCell.entity = curSnake.next
                         if (curSnake.type == Type.TAIL) {
                             curSnake.type = Type.BODY
                         }
                         nextEntity.state = MouseEntity.State.DEAD
                         nextEntity.update()
                     }
-                    nextCell.entity = curCell.entity
-                    curCell.entity = null
                     x = tempX
                     y = tempY
                 } else {
@@ -93,25 +151,25 @@ class SnakeEntity(imageUrl: String, x: Int, y: Int, grid: Grid, var type: Type, 
             KeyCode.UP, KeyCode.W -> {
                 if(direction != Direction.DOWN) {
                     direction = Direction.UP
-                    image = images[Direction.UP]!!
+                    image = headImages[Direction.UP]!!
                 }
             }
             KeyCode.RIGHT, KeyCode.D -> {
                 if(direction != Direction.LEFT) {
                     direction = Direction.RIGHT
-                    image = images[Direction.RIGHT]!!
+                    image = headImages[Direction.RIGHT]!!
                 }
             }
             KeyCode.DOWN, KeyCode.S -> {
                 if(direction != Direction.UP) {
                     direction = Direction.DOWN
-                    image = images[Direction.DOWN]!!
+                    image = headImages[Direction.DOWN]!!
                 }
             }
             KeyCode.LEFT, KeyCode.A -> {
                 if(direction != Direction.RIGHT) {
                     direction = Direction.LEFT
-                    image = images[Direction.LEFT]!!
+                    image = headImages[Direction.LEFT]!!
                 }
             }
         }
@@ -122,7 +180,7 @@ class SnakeEntity(imageUrl: String, x: Int, y: Int, grid: Grid, var type: Type, 
     }
 
     enum class Direction {
-        UP, RIGHT, DOWN, LEFT
+        UP, RIGHT, DOWN, LEFT, UPLEFT, UPRIGHT, DOWNLEFT, DOWNRIGHT
     }
 
     enum class State {

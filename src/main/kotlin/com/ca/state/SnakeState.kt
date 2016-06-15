@@ -60,7 +60,7 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
         startBtn.isDisable = true
         val timeLine = Timeline()
         timeLine.cycleCount = Timeline.INDEFINITE
-        timeLine.keyFrames += KeyFrame(Duration.seconds(0.1), object: EventHandler<ActionEvent> {
+        timeLine.keyFrames += KeyFrame(Duration.seconds(0.2), object: EventHandler<ActionEvent> {
             override fun handle(event: ActionEvent?) {
                 update()
             }
@@ -71,7 +71,6 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
 
     override fun update() {
         graphicsContext.clearRect(0.0, 0.0, gridWidth * BLOCK_SIZE, gridHeight * BLOCK_SIZE)
-        val entityList = mutableListOf<Entity>()
         var curSnakeEntity: SnakeEntity? = snakeHead
         while(curSnakeEntity != null) {
             curSnakeEntity.update()
@@ -79,22 +78,6 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
             curSnakeEntity = curSnakeEntity.next
         }
         drawEntity(mouseEntity)
-        /*for(i in 0..gridWidth - 1) {
-            for(j in 0..gridHeight - 1) {
-                val curEntity = cellGrid.cells[i][j].entity
-                if(curEntity != null) {
-                    if(!curEntity.updated) {
-                        curEntity.update()
-                        curEntity.updated = true
-                        entityList.add(curEntity)
-                        drawEntity(curEntity)
-                    }
-                }
-            }
-        }
-        for(e in entityList) {
-            e.updated = false
-        }*/
     }
 
     fun drawEntity(entity: Entity) {
