@@ -7,8 +7,10 @@ class SnakeEntity(imageUrl: String, x: Int, y: Int, grid: Grid, var type: Type, 
 
     var oldX: Int = 0
     var oldY: Int = 0
+    var score: Int = 0
     var state: State = State.ALIVE
     var direction: Direction = Direction.RIGHT
+    var beforeUpdateDirection: Direction = Direction.RIGHT
     val headImages = mapOf(Direction.RIGHT to Image("/img/snakehead_right.png"),
             Direction.DOWN to Image("/img/snakehead_down.png"),
             Direction.LEFT to Image("/img/snakehead_left.png"),
@@ -51,7 +53,7 @@ class SnakeEntity(imageUrl: String, x: Int, y: Int, grid: Grid, var type: Type, 
                 val prevX = prev?.x
                 val prevY = prev?.y
                 val nextCell = grid.getCell(x, y)
-                nextCell.entity = curCell.entity
+                nextCell.entity = this
                 curCell.entity = null
                 if(x < prevX!!) {
                     image = tailImages[Direction.RIGHT]!!
@@ -75,7 +77,7 @@ class SnakeEntity(imageUrl: String, x: Int, y: Int, grid: Grid, var type: Type, 
                 x = prev?.oldX!!
                 y = prev?.oldY!!
                 val nextCell = grid.getCell(x, y)
-                nextCell.entity = curCell.entity
+                nextCell.entity = this
                 curCell.entity = null
                 val prevX = prev?.x
                 val prevY = prev?.y
@@ -123,24 +125,29 @@ class SnakeEntity(imageUrl: String, x: Int, y: Int, grid: Grid, var type: Type, 
                 if (tempX >= 0 && tempX < grid.width && tempY >= 0 && tempY < grid.height) {
                     val nextCell = grid.getCell(tempX, tempY)
                     val nextEntity = nextCell.entity
-                    nextCell.entity = curCell.entity
-                    curCell.entity = null
-                    if (nextEntity != null && nextEntity is MouseEntity) {
-                        var curSnake = this
-                        while (curSnake.next != null) {
-                            curSnake = curSnake.next!!
+                    if (nextEntity != null) {
+                        if(nextEntity is MouseEntity) {
+                            var curSnake = this
+                            while (curSnake.next != null) {
+                                curSnake = curSnake.next!!
+                            }
+                            curSnake.next = SnakeEntity("/img/snaketail_right.png", curSnake.x, curSnake.y, grid, Type.TAIL, null, curSnake)
+                            if (curSnake.type == Type.TAIL) {
+                                curSnake.type = Type.BODY
+                            }
+                            nextEntity.state = MouseEntity.State.DEAD
+                            nextEntity.update()
+                            score++
+                        } else if (nextEntity is SnakeEntity) {
+                            state = State.DEAD
+                            return
                         }
-                        curSnake.next = SnakeEntity("/img/snaketail_right.png", curSnake.oldX, curSnake.oldY, grid, Type.TAIL, null, curSnake)
-                        val curSnakeCell = grid.getCell(curSnake.oldX, curSnake.oldY)
-                        curSnakeCell.entity = curSnake.next
-                        if (curSnake.type == Type.TAIL) {
-                            curSnake.type = Type.BODY
-                        }
-                        nextEntity.state = MouseEntity.State.DEAD
-                        nextEntity.update()
                     }
+                    nextCell.entity = this
+                    curCell.entity = null
                     x = tempX
                     y = tempY
+                    beforeUpdateDirection = direction
                 } else {
                     state = State.DEAD
                 }
@@ -151,25 +158,25 @@ class SnakeEntity(imageUrl: String, x: Int, y: Int, grid: Grid, var type: Type, 
     fun handleInput(keyCode: KeyCode) {
         when(keyCode) {
             KeyCode.UP, KeyCode.W -> {
-                if(direction != Direction.DOWN) {
+                if(beforeUpdateDirection != Direction.DOWN) {
                     direction = Direction.UP
                     image = headImages[Direction.UP]!!
                 }
             }
             KeyCode.RIGHT, KeyCode.D -> {
-                if(direction != Direction.LEFT) {
+                if(beforeUpdateDirection != Direction.LEFT) {
                     direction = Direction.RIGHT
                     image = headImages[Direction.RIGHT]!!
                 }
             }
             KeyCode.DOWN, KeyCode.S -> {
-                if(direction != Direction.UP) {
+                if(beforeUpdateDirection != Direction.UP) {
                     direction = Direction.DOWN
                     image = headImages[Direction.DOWN]!!
                 }
             }
             KeyCode.LEFT, KeyCode.A -> {
-                if(direction != Direction.RIGHT) {
+                if(beforeUpdateDirection != Direction.RIGHT) {
                     direction = Direction.LEFT
                     image = headImages[Direction.LEFT]!!
                 }

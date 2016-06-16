@@ -16,7 +16,7 @@
             <Pane>
                 <HBox>
                     <Label text="Score: " id="scoreLabel" styleClass="score" />
-                    <Label text="0" id="scoreNumber" styleClass="score" />
+                    <Label text="0" fx:id="scoreNumber" styleClass="score" />
                 </HBox>
             </Pane>
             <Button text="Start" fx:id="startBtn" onAction="#start"/>

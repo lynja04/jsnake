@@ -14,6 +14,7 @@ import javafx.scene.Scene
 import javafx.scene.canvas.Canvas
 import javafx.scene.canvas.GraphicsContext
 import javafx.scene.control.Button
+import javafx.scene.control.Label
 import javafx.scene.layout.BorderPane
 import javafx.util.Duration
 import java.util.*
@@ -25,10 +26,13 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
     val cellGrid: Grid = Grid(gridWidth, gridHeight)
     val snakeHead: SnakeEntity
     val mouseEntity: MouseEntity
+    var gameOver = false
     @FXML
     lateinit var gameCanvas: Canvas
     @FXML
     lateinit var startBtn: Button
+    @FXML
+    lateinit var scoreNumber: Label
     lateinit var graphicsContext: GraphicsContext
 
     init {
@@ -62,7 +66,11 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
         timeLine.cycleCount = Timeline.INDEFINITE
         timeLine.keyFrames += KeyFrame(Duration.seconds(0.2), object: EventHandler<ActionEvent> {
             override fun handle(event: ActionEvent?) {
-                update()
+                if(!gameOver) {
+                    update()
+                } else {
+                    timeLine.stop()
+                }
             }
         })
         scene?.onKeyPressed = EventHandler { snakeHead.handleInput(it.code) }
@@ -73,11 +81,17 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
         graphicsContext.clearRect(0.0, 0.0, gridWidth * BLOCK_SIZE, gridHeight * BLOCK_SIZE)
         var curSnakeEntity: SnakeEntity? = snakeHead
         while(curSnakeEntity != null) {
-            curSnakeEntity.update()
+            if(snakeHead.state != SnakeEntity.State.DEAD) {
+                curSnakeEntity.update()
+            }
             drawEntity(curSnakeEntity)
             curSnakeEntity = curSnakeEntity.next
         }
         drawEntity(mouseEntity)
+        scoreNumber.text = "" + snakeHead.score
+        if(snakeHead.state == SnakeEntity.State.DEAD) {
+            gameOver = true
+        }
     }
 
     fun drawEntity(entity: Entity) {
