@@ -7,21 +7,29 @@
 <?import javafx.collections.FXCollections?>
 <?import com.ca.model.HighScoreModel?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
 <BorderPane styleClass="root" xmlns:fx="http://javafx.com/fxml">
     <stylesheets>
         <URL value="@gameOver.css" />
     </stylesheets>
 
+    <top>
+        <VBox>
+            <Label fx:id="scoreLabel"/>
+        </VBox>
+    </top>
+
     <center>
         <VBox>
-            <TableView fx:id="tableView" prefWidth="300" prefHeight="600">
+            <Label fx:id="highScoreLabel" />
+            <TableView fx:id="tableView" prefWidth="200" prefHeight="300">
                 <columns>
-                    <TableColumn text="Username" prefWidth="100">
+                    <TableColumn text="Username:" prefWidth="75">
                         <cellValueFactory>
                             <PropertyValueFactory property="username" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="Score" prefWidth="100">
+                    <TableColumn text="Score:" prefWidth="50">
                         <cellValueFactory>
                             <PropertyValueFactory property="score" />
                         </cellValueFactory>
@@ -42,7 +50,9 @@
                     </FXCollections>
                 </items>
             </TableView>
-            <Label fx:id="scoreLabel" />
         </VBox>
     </center>
+    <bottom>
+        <Button fx:id="playAgainButton"></Button>
+    </bottom>
 </BorderPane>

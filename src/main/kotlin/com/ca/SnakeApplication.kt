@@ -17,6 +17,7 @@ class SnakeApplication: Application() {
     override fun start(primaryStage: Stage?) {
         primaryStage?.isResizable = false
         primaryStage?.title = "JSnake"
+        primaryStage?.centerOnScreen()
         val gsm = GameStateManager(primaryStage!!)
         val menuState = MenuState(gsm, null)
         gsm.changeState(menuState)

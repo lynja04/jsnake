@@ -1,5 +1,23 @@
 .root {
-    -fx-padding: 25;
+    -fx-background-color: #000000;
+    -fx-padding: 50;
     -fx-pref-width: 800.0;
     -fx-pref-height: 800.0;
+}
+
+#scoreLabel {
+    -fx-font-size: 23px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FFFFFF;
+}
+
+.button {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+#highScoreLabel {
+    -fx-font-size: 23px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FFFFFF;
 }
