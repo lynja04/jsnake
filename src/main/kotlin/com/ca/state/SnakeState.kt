@@ -60,7 +60,7 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
     }
 
     override fun init(args: Map<String, String>?) {
-        val fxmlLoader = FXMLLoader(MenuState::class.java.getResource("/views/snakeGame.fxml"))
+        val fxmlLoader = FXMLLoader(SnakeState::class.java.getResource("/views/snakeGame.fxml"))
         fxmlLoader.setController(this)
         val snakePane = fxmlLoader.load<BorderPane>()
         graphicsContext = gameCanvas.graphicsContext2D
@@ -78,6 +78,9 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
                     update()
                 } else {
                     timeLine.stop()
+                    val params = mapOf("score" to snakeHead.score.toString())
+                    val gameOverState = GameOverState(gameStateManager, params)
+                    gameStateManager.changeState(gameOverState)
                 }
             }
         })
@@ -96,7 +99,7 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
             curSnakeEntity = curSnakeEntity.next
         }
         drawEntity(mouseEntity)
-        scoreNumber.text = "" + snakeHead.score
+        scoreNumber.text = snakeHead.score.toString()
         if(snakeHead.state == SnakeEntity.State.DEAD) {
             gameOver = true
         }

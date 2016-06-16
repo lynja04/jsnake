@@ -1,0 +1,48 @@
+<?import java.net.URL?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.collections.FXCollections?>
+<?import com.ca.model.HighScoreModel?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane styleClass="root" xmlns:fx="http://javafx.com/fxml">
+    <stylesheets>
+        <URL value="@gameOver.css" />
+    </stylesheets>
+
+    <center>
+        <VBox>
+            <TableView fx:id="tableView" prefWidth="300" prefHeight="600">
+                <columns>
+                    <TableColumn text="Username" prefWidth="100">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="username" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Score" prefWidth="100">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="score" />
+                        </cellValueFactory>
+                    </TableColumn>
+                </columns>
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <HighScoreModel username="user1" score="1000" />
+                        <HighScoreModel username="user2" score="900" />
+                        <HighScoreModel username="user3" score="800" />
+                        <HighScoreModel username="user4" score="700" />
+                        <HighScoreModel username="user5" score="600" />
+                        <HighScoreModel username="user6" score="500" />
+                        <HighScoreModel username="user7" score="400" />
+                        <HighScoreModel username="user8" score="300" />
+                        <HighScoreModel username="user9" score="200" />
+                        <HighScoreModel username="user10" score="100" />
+                    </FXCollections>
+                </items>
+            </TableView>
+            <Label fx:id="scoreLabel" />
+        </VBox>
+    </center>
+</BorderPane>
