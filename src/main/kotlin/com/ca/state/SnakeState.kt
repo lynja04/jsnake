@@ -27,6 +27,7 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
     val snakeHead: SnakeEntity
     val mouseEntity: MouseEntity
     var gameOver = false
+    val tickRate: Double
     @FXML
     lateinit var gameCanvas: Canvas
     @FXML
@@ -45,6 +46,13 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
         cellGrid.cells[randX][randY].entity = mouseEntity
         drawEntity(cellGrid.cells[0][0].entity!!)
         drawEntity(cellGrid.cells[randX][randY].entity!!)
+        val difficulty = params?.get("difficulty")?.toLowerCase() ?: "medium"
+        when(difficulty) {
+            "easy" -> tickRate = 0.15
+            "medium" -> tickRate = 0.09
+            "hard" -> tickRate = 0.06
+            else -> tickRate = 0.09
+        }
     }
 
     companion object {
@@ -64,7 +72,7 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
         startBtn.isDisable = true
         val timeLine = Timeline()
         timeLine.cycleCount = Timeline.INDEFINITE
-        timeLine.keyFrames += KeyFrame(Duration.seconds(0.2), object: EventHandler<ActionEvent> {
+        timeLine.keyFrames += KeyFrame(Duration.seconds(tickRate), object: EventHandler<ActionEvent> {
             override fun handle(event: ActionEvent?) {
                 if(!gameOver) {
                     update()
