@@ -4,7 +4,6 @@
     -fx-pref-width: 800.0;
     -fx-pref-height: 800.0;
 }
-
 #scoreLabel {
     -fx-font-size: 23px;
     -fx-font-weight: bold;
@@ -12,7 +11,7 @@
 }
 
 .button {
-    -fx-font-size: 12px;
+    -fx-font-size: 80px;
     -fx-font-weight: bold;
 }
 
@@ -20,4 +19,41 @@
     -fx-font-size: 23px;
     -fx-font-weight: bold;
     -fx-text-fill: #FFFFFF;
+}
+
+#tableView{
+    -fx-background-color: transparent;
+}
+
+#tableView .column-header-background{
+    -fx-background-color: linear-gradient(#00FF7F 0%, #000000 100%);
+}
+
+#tableView .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+#tableView .column-header {
+    -fx-background-color: transparent;
+}
+
+#tableView .table-cell{
+    -fx-text-fill: white;
+}
+
+.table-row-cell{
+    -fx-background-color: -fx-table-cell-border-color, linear-gradient(#00FF7F 0%, #000000 100%);
+    -fx-background-insets: 0 0 0 1 0;
+}
+
+.table-row-cell:odd{
+    -fx-background-color: -fx-table-cell-border-color, #000000;
+    -fx-background-insets: 0, 0 0 1 0;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #00FF7F;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
 }
