@@ -8,14 +8,19 @@
     -fx-font-size: 23px;
     -fx-font-weight: bold;
     -fx-text-fill: white;
+    -fx-padding: 0 0 20
 }
 
 .button {
-    -fx-font-size: 80px;
+    -fx-font-size: 23px;
     -fx-font-weight: bold;
 }
 
-#highScoreLabel {
+#buttonContainer{
+    -fx-padding: 20
+}
+
+#scoreBoardLabel {
     -fx-font-size: 23px;
     -fx-font-weight: bold;
     -fx-text-fill: white;

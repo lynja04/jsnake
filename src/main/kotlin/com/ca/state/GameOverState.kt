@@ -12,10 +12,13 @@ class GameOverState(gameStateManager: GameStateManager, params: Map<String, Stri
     var difficulty: String = ""
     @FXML
     lateinit var scoreLabel: Label
+    @FXML
+    lateinit var scoreBoardLabel: Label
 
     init {
         score = params?.get("score")?.toInt() ?: 0
         difficulty = params?.get("difficulty") ?: "medium"
+        scoreBoardLabel.text = "Top 10 scores for ${difficulty.capitalize()}:"
     }
 
     override fun init(args: Map<String, String>?) {

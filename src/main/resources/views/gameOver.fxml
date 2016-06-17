@@ -4,22 +4,23 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.VBox?>
 <?import java.net.URL?>
+<?import javafx.scene.layout.HBox?>
 <VBox styleClass="root" alignment="CENTER" xmlns:fx="http://javafx.com/fxml">
     <stylesheets>
         <URL value="@gameOver.css"/>
     </stylesheets>
 
     <Label fx:id="scoreLabel"/>
-
-    <Label fx:id="scoreBoardLabel" text="Top 10 scores:"/>
-    <TableView fx:id="tableView" prefWidth="200" prefHeight="300">
+    <Label fx:id="scoreBoardLabel"/>
+    <TableView fx:id="tableView" maxWidth="300" maxHeight="266">
+        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
         <columns>
-            <TableColumn text="Username:" prefWidth="75">
+            <TableColumn text="Username:" prefWidth="150">
                 <cellValueFactory>
                     <PropertyValueFactory property="username"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn text="Score:" prefWidth="50">
+            <TableColumn text="Score:" prefWidth="150">
                 <cellValueFactory>
                     <PropertyValueFactory property="score"/>
                 </cellValueFactory>
@@ -40,6 +41,8 @@
             </FXCollections>
         </items>
     </TableView>
-    <Button fx:id="playAgainButton" text="Play Again" onAction="#playAgain" />
-    <Button fx:id="mainMenuButton" text="Main Menu" onAction="#mainMenu" />
+    <HBox id="buttonContainer" spacing="20" alignment="CENTER">
+        <Button fx:id="playAgainButton" text="Play Again" onAction="#playAgain"/>
+        <Button fx:id="mainMenuButton" text="Main Menu" onAction="#mainMenu"/>
+    </HBox>
 </VBox>
