@@ -28,6 +28,7 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
     val mouseEntity: MouseEntity
     var gameOver = false
     val tickRate: Double
+    val difficulty: String
     @FXML
     lateinit var gameCanvas: Canvas
     @FXML
@@ -46,7 +47,7 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
         cellGrid.cells[randX][randY].entity = mouseEntity
         drawEntity(cellGrid.cells[0][0].entity!!)
         drawEntity(cellGrid.cells[randX][randY].entity!!)
-        val difficulty = params?.get("difficulty")?.toLowerCase() ?: "medium"
+        difficulty = params?.get("difficulty")?.toLowerCase() ?: "medium"
         when(difficulty) {
             "easy" -> tickRate = 0.15
             "medium" -> tickRate = 0.09
@@ -78,7 +79,7 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
                     update()
                 } else {
                     timeLine.stop()
-                    val params = mapOf("score" to snakeHead.score.toString())
+                    val params = mapOf("score" to snakeHead.score.toString(), "difficulty" to difficulty)
                     val gameOverState = GameOverState(gameStateManager, params)
                     gameStateManager.changeState(gameOverState)
                 }

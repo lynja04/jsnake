@@ -7,7 +7,7 @@
 #scoreLabel {
     -fx-font-size: 23px;
     -fx-font-weight: bold;
-    -fx-text-fill: #FFFFFF;
+    -fx-text-fill: white;
 }
 
 .button {
@@ -18,7 +18,7 @@
 #highScoreLabel {
     -fx-font-size: 23px;
     -fx-font-weight: bold;
-    -fx-text-fill: #FFFFFF;
+    -fx-text-fill: white;
 }
 
 #tableView{
@@ -38,16 +38,16 @@
     -fx-background-color: transparent;
 }
 
-#tableView .table-cell{
+#tableView .table-cell {
     -fx-text-fill: white;
 }
 
-.table-row-cell{
+.table-row-cell {
     -fx-background-color: -fx-table-cell-border-color, linear-gradient(#00FF7F 0%, #000000 100%);
     -fx-background-insets: 0 0 0 1 0;
 }
 
-.table-row-cell:odd{
+.table-row-cell:odd {
     -fx-background-color: -fx-table-cell-border-color, #000000;
     -fx-background-insets: 0, 0 0 1 0;
 }
