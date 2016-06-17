@@ -47,6 +47,10 @@
     -fx-text-fill: white;
 }
 
+#tableView .table-column {
+    -fx-alignment: CENTER;
+}
+
 .table-row-cell {
     -fx-background-color: -fx-table-cell-border-color, linear-gradient(#00FF7F 0%, #000000 100%);
     -fx-background-insets: 0 0 0 1 0;

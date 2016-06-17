@@ -79,6 +79,7 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
                     update()
                 } else {
                     timeLine.stop()
+                    Thread.sleep(200)
                     val params = mapOf("score" to snakeHead.score.toString(), "difficulty" to difficulty)
                     val gameOverState = GameOverState(gameStateManager, params)
                     gameStateManager.changeState(gameOverState)

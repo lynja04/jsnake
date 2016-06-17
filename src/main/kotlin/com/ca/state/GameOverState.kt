@@ -18,6 +18,7 @@ class GameOverState(gameStateManager: GameStateManager, params: Map<String, Stri
     init {
         score = params?.get("score")?.toInt() ?: 0
         difficulty = params?.get("difficulty") ?: "medium"
+        scoreLabel.text = "Your score: $score"
         scoreBoardLabel.text = "Top 10 scores for ${difficulty.capitalize()}:"
     }
 
@@ -25,7 +26,6 @@ class GameOverState(gameStateManager: GameStateManager, params: Map<String, Stri
         val fxmlLoader = FXMLLoader(GameOverState::class.java.getResource("/views/gameOver.fxml"))
         fxmlLoader.setController(this)
         val highScorePane = fxmlLoader.load<VBox>()
-        scoreLabel.text = "Your score: $score"
         scene = Scene(highScorePane)
     }
 
