@@ -12,7 +12,8 @@
 
     <Label fx:id="scoreLabel"/>
     <Label fx:id="scoreBoardLabel"/>
-    <TableView fx:id="tableView" maxWidth="300" maxHeight="266">
+    <Label fx:id="errorLabel" />
+    <TableView fx:id="highScoreTable" maxWidth="300" maxHeight="266">
         <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
         <columns>
             <TableColumn text="Username:" prefWidth="150">
@@ -26,20 +27,6 @@
                 </cellValueFactory>
             </TableColumn>
         </columns>
-        <items>
-            <FXCollections fx:factory="observableArrayList">
-                <HighScoreModel username="user1" score="1000"/>
-                <HighScoreModel username="user2" score="900"/>
-                <HighScoreModel username="user3" score="800"/>
-                <HighScoreModel username="user4" score="700"/>
-                <HighScoreModel username="user5" score="600"/>
-                <HighScoreModel username="user6" score="500"/>
-                <HighScoreModel username="user7" score="400"/>
-                <HighScoreModel username="user8" score="300"/>
-                <HighScoreModel username="user9" score="200"/>
-                <HighScoreModel username="user10" score="100"/>
-            </FXCollections>
-        </items>
     </TableView>
     <HBox id="buttonContainer" spacing="20" alignment="CENTER">
         <Button fx:id="playAgainButton" text="Play Again" onAction="#playAgain"/>

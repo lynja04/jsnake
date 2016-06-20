@@ -26,28 +26,28 @@
     -fx-text-fill: white;
 }
 
-#tableView{
+#highScoreTable{
     -fx-background-color: transparent;
 }
 
-#tableView .column-header-background{
+#highScoreTable .column-header-background{
     -fx-background-color: linear-gradient(#00FF7F 0%, #000000 100%);
 }
 
-#tableView .column-header-background .label{
+#highScoreTable .column-header-background .label{
     -fx-background-color: transparent;
     -fx-text-fill: white;
 }
 
-#tableView .column-header {
+#highScoreTable .column-header {
     -fx-background-color: transparent;
 }
 
-#tableView .table-cell {
+#highScoreTable .table-cell {
     -fx-text-fill: white;
 }
 
-#tableView .table-column {
+#highScoreTable .table-column {
     -fx-alignment: CENTER;
 }
 
@@ -65,4 +65,9 @@
     -fx-background-color: #00FF7F;
     -fx-background-insets: 0;
     -fx-background-radius: 1;
+}
+
+#errorLabel {
+    -fx-text-fill: red;
+    -fx-font-size: 16pt;
 }
