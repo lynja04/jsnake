@@ -11,7 +11,7 @@ class SnakeApplication: Application() {
     companion object{
         @JvmStatic
         fun main(args: Array<String>){
-            FuelManager.instance.basePath = "http://localhost:8080/api"
+            FuelManager.instance.basePath = "http://192.168.1.204:8080/api"
             launch(SnakeApplication::class.java)
         }
     }
