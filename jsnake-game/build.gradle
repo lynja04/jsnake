@@ -10,10 +10,12 @@ buildscript {
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'kotlin'
 
-sourceCompatibility = 1.5
+apply plugin: 'idea'
+apply plugin: 'kotlin'
+apply plugin: 'application'
+
+mainClassName = 'com.ca.SnakeApplication'
 
 repositories {
     mavenCentral()
@@ -21,5 +23,11 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.2-1"
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.ca.SnakeApplication'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }

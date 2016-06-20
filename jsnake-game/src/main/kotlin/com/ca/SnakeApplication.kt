@@ -23,5 +23,4 @@ class SnakeApplication: Application() {
         gsm.changeState(menuState)
         primaryStage.show()
     }
-
 }
