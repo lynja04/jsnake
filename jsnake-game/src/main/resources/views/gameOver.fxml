@@ -18,12 +18,17 @@
         <columns>
             <TableColumn text="Username:" prefWidth="150">
                 <cellValueFactory>
-                    <PropertyValueFactory property="username"/>
+                    <PropertyValueFactory property="username" />
                 </cellValueFactory>
             </TableColumn>
             <TableColumn text="Score:" prefWidth="150">
                 <cellValueFactory>
-                    <PropertyValueFactory property="score"/>
+                    <PropertyValueFactory property="score" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Date:" prefWidth="150">
+                <cellValueFactory>
+                    <PropertyValueFactory property="timestamp" />
                 </cellValueFactory>
             </TableColumn>
         </columns>

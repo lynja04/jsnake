@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.dao.DataAccessException
 import org.springframework.data.domain.PageRequest
 import org.springframework.web.bind.annotation.*
+import java.util.*
 
 @RestController
 class HighscoreController @Autowired constructor(val highScoreRepository: HighscoreRepository) {
@@ -27,7 +28,7 @@ class HighscoreController @Autowired constructor(val highScoreRepository: Highsc
             difficultyEnum = Difficulty.valueOf(difficulty)
         } catch(ex : IllegalArgumentException) { }
         val highscores = highScoreRepository.findByDifficultyOrderByScoreDesc(difficultyEnum, PageRequest(page, size))
-                .map { it -> HighscoreModel(it.username, it.score, it.difficulty.toString())}
+                .map { it -> HighscoreModel(it.username, it.score, it.difficulty.toString(), it.timestamp)}
         return APIResponse(true, mutableListOf(), highscores.toMutableList())
     }
 
@@ -39,6 +40,7 @@ class HighscoreController @Autowired constructor(val highScoreRepository: Highsc
         val highscoreEntity = HighscoreEntity()
         highscoreEntity.username = highscoreModel.username
         highscoreEntity.score = highscoreModel.score
+        highscoreEntity.timestamp = java.sql.Date(Date().time)
         try {
             highscoreEntity.difficulty = Difficulty.valueOf(highscoreModel.difficulty.toLowerCase())
         } catch(ex : IllegalArgumentException) {

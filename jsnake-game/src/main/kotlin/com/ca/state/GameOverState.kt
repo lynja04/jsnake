@@ -11,6 +11,7 @@ import javafx.scene.Scene
 import javafx.scene.control.Label
 import javafx.scene.control.TableView
 import javafx.scene.layout.VBox
+import java.util.*
 
 class GameOverState(gameStateManager: GameStateManager, params: Map<String, String>?) : GameState(gameStateManager, params) {
 
@@ -37,7 +38,7 @@ class GameOverState(gameStateManager: GameStateManager, params: Map<String, Stri
                 val dataArray = resultJson.array<JsonObject>("data")
                 if(dataArray != null) {
                     val highscoreModels = dataArray.map {
-                        it -> HighscoreModel(it.string("username")!!, it.int("score")!!)
+                        it -> HighscoreModel(it.string("username")!!, it.int("score")!!, it.string("timestamp")!!)
                     }
                     highScoreTable.items = FXCollections.observableList(highscoreModels)
                 }

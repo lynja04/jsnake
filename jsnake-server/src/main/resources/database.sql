@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS `jsnake`.`highscore` (
   `username` VARCHAR(45) NOT NULL,
   `score` INT NOT NULL,
   `difficulty` VARCHAR(6) NOT NULL,
+  `timestamp` TIMESTAMP NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `DIFFICULTY_INDEX` USING BTREE (`difficulty` ASC))
 ENGINE = InnoDB;
