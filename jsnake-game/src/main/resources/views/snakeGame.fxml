@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import java.net.URL?>
 <?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.layout.StackPane?>
 <BorderPane styleClass="root" xmlns:fx="http://javafx.com/fxml">
     <stylesheets>
         <URL value="@snakeGame.css" />
@@ -26,8 +27,8 @@
         </HBox>
     </top>
     <center>
-        <Pane id="gamePane">
+        <StackPane fx:id="gamePane">
             <Canvas fx:id="gameCanvas" height="800" width="800" />
-        </Pane>
+        </StackPane>
     </center>
 </BorderPane>

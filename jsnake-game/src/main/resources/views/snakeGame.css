@@ -23,3 +23,14 @@
     -fx-font-weight: bold;
     -fx-text-fill: white;
 }
+
+#progressContainer {
+    -fx-background-color: black;
+    -fx-max-width: 300;
+    -fx-max-height: 100;
+}
+
+#progressText {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}

@@ -2,8 +2,8 @@
     -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #00FF7F, #000000);
     -fx-spacing: 30;
     -fx-padding: 25;
-    -fx-pref-width: 250.0;
-    -fx-pref-height: 250.0;
+    -fx-pref-width: 300.0;
+    -fx-pref-height: 300.0;
 }
 
 #welcome {
@@ -23,5 +23,10 @@
 
 RadioButton, Button {
     -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+#usernameLabel {
+    -fx-font-size: 14px;
     -fx-font-weight: bold;
 }

@@ -1,6 +1,5 @@
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import java.net.URL?>
 <VBox styleClass="root" xmlns:fx="http://javafx.com/fxml">
     <stylesheets>
@@ -20,6 +19,11 @@
             <RadioButton text="Medium" selected="true" toggleGroup="$difficultyBtnsGroup" />
             <RadioButton text="Hard" toggleGroup="$difficultyBtnsGroup" />
         </VBox>
+    </HBox>
+
+    <HBox alignment="CENTER" spacing="10">
+        <Label id="usernameLabel" text="Username:" />
+        <TextField fx:id="usernameTextField" text="username" />
     </HBox>
 
     <HBox alignment="CENTER">
