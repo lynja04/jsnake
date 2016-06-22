@@ -17,6 +17,7 @@ class GameOverState(gameStateManager: GameStateManager, params: Map<String, Stri
 
     var score: Int = 0
     var difficulty: String = ""
+    val username: String
     @FXML
     lateinit var scoreLabel: Label
     @FXML
@@ -27,6 +28,7 @@ class GameOverState(gameStateManager: GameStateManager, params: Map<String, Stri
     lateinit var highScoreTable: TableView<HighscoreModel>
 
     init {
+        username = params?.get("username") ?: "username"
         score = params?.get("score")?.toInt() ?: 0
         difficulty = params?.get("difficulty") ?: "medium"
         scoreLabel.text = "Your score: $score"
@@ -62,13 +64,13 @@ class GameOverState(gameStateManager: GameStateManager, params: Map<String, Stri
 
     @FXML
     fun playAgain() {
-        val params = mapOf("difficulty" to difficulty)
+        val params = mapOf("difficulty" to difficulty, "username" to username)
         val snakeState = SnakeState(gameStateManager, params)
         gameStateManager.changeState(snakeState)
     }
 
     @FXML
     fun mainMenu() {
-        gameStateManager.changeState(MenuState(gameStateManager, null))
+        gameStateManager.changeState(MenuState(gameStateManager, mapOf("username" to username)))
     }
 }

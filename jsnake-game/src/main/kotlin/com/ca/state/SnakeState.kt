@@ -14,7 +14,6 @@ import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
-import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.Scene
 import javafx.scene.canvas.Canvas
@@ -22,7 +21,6 @@ import javafx.scene.canvas.GraphicsContext
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.ProgressIndicator
-import javafx.scene.layout.BackgroundFill
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.HBox
 import javafx.scene.layout.StackPane
@@ -68,6 +66,7 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
             "easy" -> tickRate = 0.15
             "medium" -> tickRate = 0.09
             "hard" -> tickRate = 0.06
+            "insane" -> tickRate = 0.02
             else -> tickRate = 0.09
         }
     }
@@ -105,7 +104,8 @@ class SnakeState(gameStateManager: GameStateManager, params: Map<String, String>
                                     .body(requestBody.toJsonString())
                                     .responseString()
                             Platform.runLater {
-                                val params = mapOf("score" to snakeHead.score.toString(), "difficulty" to difficulty)
+                                val params = mapOf("score" to snakeHead.score.toString(), "difficulty" to difficulty,
+                                        "username" to username)
                                 val gameOverState = GameOverState(gameStateManager, params)
                                 gameStateManager.changeState(gameOverState)
                             }

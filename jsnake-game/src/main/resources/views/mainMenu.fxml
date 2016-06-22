@@ -18,6 +18,7 @@
             <RadioButton text="Easy" toggleGroup="$difficultyBtnsGroup" />
             <RadioButton text="Medium" selected="true" toggleGroup="$difficultyBtnsGroup" />
             <RadioButton text="Hard" toggleGroup="$difficultyBtnsGroup" />
+            <RadioButton text="Insane" toggleGroup="$difficultyBtnsGroup" />
         </VBox>
     </HBox>
 

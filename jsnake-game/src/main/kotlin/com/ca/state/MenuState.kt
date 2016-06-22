@@ -24,6 +24,7 @@ class MenuState(gameStateManager: GameStateManager, params: Map<String, String>?
                 usernameTextField.text = trimmedText
             }
         })
+        usernameTextField.text = params?.get("username") ?: "username"
     }
 
     override fun update() {
